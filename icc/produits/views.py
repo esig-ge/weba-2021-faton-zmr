@@ -1,5 +1,6 @@
 # Zumeri Faton et Châtelain Dorian
 import stripe
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from .forms import ProduitForm
 from .models import Produit
@@ -70,6 +71,7 @@ def gererProduit(request):
     return render(request, '../templates/gererProduit.html', {'produits': produits})
 
 
+@staff_member_required
 def ajouter_produit(request):
     if request.method == "POST":
         fm = ProduitForm(request.POST, request.FILES)
