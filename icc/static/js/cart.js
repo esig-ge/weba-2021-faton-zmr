@@ -1,5 +1,4 @@
 // Zumeri Faton
-// console.log('Hello world')
 
 var updateBtns = document.getElementsByClassName('update-cart')
 
