@@ -1,26 +1,57 @@
 {#FERREIRA STOJKOVIC Nikola#}
 {% extends 'base.html' %}
-<script src="verifDate.js"></script>
+{% block extrahead %}
+
+<link rel="stylesheet" href="popup.css">
+{% endblock %}
 {% block content %}
 
-    <div class="row">
-        <div class="col-sm-4">
-            <h4 class="alert alert-info">Ajouter réservation</h4>
-            <form action="{% url 'ajouter-reservation' %}" method="POST">
-                {% csrf_token %}
-                <div id="divForPopup" onclick=""></div>
-                {{ form.as_p }}
-                <input type="submit" class="btn btn-success" value="Ajouter réservation">
-            </form>
-        </div>
-    </div>
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="alert alert-info">Ajouter réservation</h4>
+        <form action="{% url 'ajouter-reservation' %}" method="POST">
+            {% csrf_token %}
+            <div id="divForPopup" class="popup"></div>
+            <br>
+            {{ form.as_p }}
+            <script>
+                const popup = document.createElement("span");
+                popup.setAttribute("class", "popuperror");
+                popup.setAttribute("id", "id_popuperror");
+                const messageError = document.createTextNode("La date entrée n'est pas valide !");
+                document.getElementById("divForPopup").appendChild(popup);
 
-<script>
-    const popup = document.createElement('span');
-    popup.setAttribute('class', 'popuperror');
-    popup.setAttribute('id', 'id_popuperror');
-    const texterror = document.createTextNode("La date entrée n'est pas valide !");
-    document.getElementById('divForPopup').appendChild(popup);
-</script>
+                // popup.appendChild(messageError);
+                function showPopup(event) {
+                    popup.appendChild(messageError);
+                    console.log(asdf(getDateSelected("id_popuperror")));
+                }
+
+                var testId = document.getElementById("id_date");
+                var dateDuJour = today.getDay() + '.' + today.getMonth() + '.' + today.getFullYear();
+                testId.addEventListener("change", showPopup);
+
+                function asdf(b) {
+                    if (testId.value < dateDuJour) {
+                        b.classList.toggle("show");
+                        console.log(dateDuJour)
+                    }
+                }
+
+                function getDateSelected(a) {
+                    return document.getElementById(a);
+                }
+            </script>
+            <input type="submit" class="btn btn-success" value="Ajouter réservation">
+        </form>
+    </div>
+    <script src="verifDate.js"></script>
+</div>
+
 
 {% endblock %}
+
+
+
+
+
