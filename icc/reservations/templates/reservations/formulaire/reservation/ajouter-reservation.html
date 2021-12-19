@@ -28,13 +28,15 @@
                 }
 
                 var testId = document.getElementById("id_date");
-                var dateDuJour = today.getDay() + '.' + today.getMonth() + '.' + today.getFullYear();
+                var dd = new Date().getDate();
+                var mm = new Date().getMonth() + 1;
+                var yyyy = new Date().getFullYear();
+                var n = yyyy + '-' + mm + '-' + dd;
                 testId.addEventListener("change", showPopup);
-
+                
                 function asdf(b) {
-                    if (testId.value < dateDuJour) {
+                    if (testId.day === 0) {
                         b.classList.toggle("show");
-                        console.log(dateDuJour)
                     }
                 }
 
