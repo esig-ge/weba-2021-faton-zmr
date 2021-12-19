@@ -1,7 +1,7 @@
 {#FERREIRA STOJKOVIC Nikola#}
 {% extends 'base.html' %}
 {% block extrahead %}
-
+<script src="verifDate.js"></script>
 <link rel="stylesheet" href="popup.css">
 {% endblock %}
 {% block content %}
@@ -18,13 +18,16 @@
                 const popup = document.createElement("span"); //Dom création de l'héritage
                 popup.setAttribute("class", "popuperror");
                 popup.setAttribute("id", "id_popuperror");
-                const messageError = document.createTextNode("La date entrée n'est pas valide !");
-                document.getElementById("divForPopup").appendChild(popup);
 
-                // popup.appendChild(messageError);
-                function showPopup(event) {
+                const messageError = document.createTextNode("La date entrée n'est pas valide !");
+                document.getElementById("divForPopup").appendChild(popup); // effectue le lien de parenté entre la constante popup et la divForPopup
+
+                function showPopup() {      // permet d'afficher le popup
+                    if (testId.value >= n) {        // comparer la date avec la date du jour
+                        classList.toggle("show");
+                    }
                     popup.appendChild(messageError);
-                    console.log(compareDate(getDateSelected("id_popuperror")));  // callback
+                    //console.log(compareDate(getDateSelected("id_popuperror")));  // callback
                 }
 
                 var testId = document.getElementById("id_date");
@@ -32,22 +35,13 @@
                 var mm = new Date().getMonth() + 1;
                 var yyyy = new Date().getFullYear();
                 var n = yyyy + '-' + mm + '-' + dd;
-                testId.addEventListener("change", showPopup);
+                testId.addEventListener("change", showPopup); // callback
 
-                function compareDate(b) {
-                    if (testId.value < n) {
-                        b.classList.toggle("show");
-                    }
-                }
-
-                function getDateSelected(a) {
-                    return document.getElementById(a);
-                }
             </script>
             <input type="submit" class="btn btn-success" value="Ajouter réservation">
         </form>
     </div>
-    <script src="verifDate.js"></script>
+
 </div>
 
 
