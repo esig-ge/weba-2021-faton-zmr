@@ -1,6 +1,6 @@
 {#FERREIRA STOJKOVIC Nikola#}
 {% extends 'base.html' %}
-
+<script src="verifDate.js"></script>
 {% block content %}
 
     <div class="row">
@@ -8,6 +8,7 @@
             <h4 class="alert alert-info">Ajouter réservation</h4>
             <form action="{% url 'ajouter-reservation' %}" method="POST">
                 {% csrf_token %}
+                <div id="divForPopup" onclick=""></div>
                 {{ form.as_p }}
                 <input type="submit" class="btn btn-success" value="Ajouter réservation">
             </form>
@@ -15,8 +16,11 @@
     </div>
 
 <script>
-
-
+    const popup = document.createElement('span');
+    popup.setAttribute('class', 'popuperror');
+    popup.setAttribute('id', 'id_popuperror');
+    const texterror = document.createTextNode("La date entrée n'est pas valide !");
+    document.getElementById('divForPopup').appendChild(popup);
 </script>
 
 {% endblock %}
