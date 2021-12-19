@@ -33,9 +33,9 @@
                 var yyyy = new Date().getFullYear();
                 var n = yyyy + '-' + mm + '-' + dd;
                 testId.addEventListener("change", showPopup);
-                
+
                 function asdf(b) {
-                    if (testId.day === 0) {
+                    if (testId.value < n) {
                         b.classList.toggle("show");
                     }
                 }
