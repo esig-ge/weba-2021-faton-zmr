@@ -24,7 +24,7 @@
                 // popup.appendChild(messageError);
                 function showPopup(event) {
                     popup.appendChild(messageError);
-                    console.log(asdf(getDateSelected("id_popuperror")));
+                    console.log(compareDate(getDateSelected("id_popuperror")));
                 }
 
                 var testId = document.getElementById("id_date");
@@ -34,7 +34,7 @@
                 var n = yyyy + '-' + mm + '-' + dd;
                 testId.addEventListener("change", showPopup);
 
-                function asdf(b) {
+                function compareDate(b) {
                     if (testId.value < n) {
                         b.classList.toggle("show");
                     }
