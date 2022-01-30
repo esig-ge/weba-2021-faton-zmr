@@ -23,18 +23,16 @@
                 document.getElementById("divForPopup").appendChild(popup); // effectue le lien de parenté entre la constante popup et la divForPopup
 
                 function showPopup() {      // permet d'afficher le popup
-                    if (testId.value >= n) {        // comparer la date avec la date du jour
-                        classList.toggle("show");
+                    if (testId.value <= n) {        // comparer la date avec la date du jour
+                        popup.appendChild(messageError);
                     }
-                    popup.appendChild(messageError);
-                    //console.log(compareDate(getDateSelected("id_popuperror")));  // callback
                 }
 
                 var testId = document.getElementById("id_date");
                 var dd = new Date().getDate();
-                var mm = new Date().getMonth() + 1;
+                var mm = new Date().getMonth();
                 var yyyy = new Date().getFullYear();
-                var n = yyyy + '-' + mm + '-' + dd;
+                var n = yyyy + '-' + mm + 1 + '-' + dd;
                 testId.addEventListener("change", showPopup); // callback
 
             </script>
