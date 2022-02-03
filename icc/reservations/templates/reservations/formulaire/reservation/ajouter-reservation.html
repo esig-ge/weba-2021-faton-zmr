@@ -1,45 +1,56 @@
 {#FERREIRA STOJKOVIC Nikola#}
 {% extends 'base.html' %}
 {% block extrahead %}
-<script src="verifDate.js"></script>
-<link rel="stylesheet" href="popup.css">
+    <script src="verifDate.js"></script>
+    <link rel="stylesheet" href="popup.css">
 {% endblock %}
 {% block content %}
 
-<div class="row">
-    <div class="col-sm-4">
-        <h4 class="alert alert-info">Ajouter réservation</h4>
-        <form action="{% url 'ajouter-reservation' %}" method="POST">
-            {% csrf_token %}
-            <div id="divForPopup" class="popup"></div>
-            <br>
-            {{ form.as_p }}
-            <script>
-                const popup = document.createElement("span"); //Dom création de l'héritage
-                popup.setAttribute("class", "popuperror");
-                popup.setAttribute("id", "id_popuperror");
-                const messageError = document.createTextNode("La date entrée n'est pas valide !");
-                document.getElementById("divForPopup").appendChild(popup); // effectue le lien de parenté entre la constante popup et la divForPopup
+    <div class="row">
+        <div class="col-sm-4">
+            <h4 class="alert alert-info">Ajouter réservation</h4>
+            <form action="{% url 'ajouter-reservation' %}" method="POST">
+                {% csrf_token %}
+                <div id="divForPopup" class="popup"></div>
+                <br>
+                {{ form.as_p }}
+                <script>
+                    // effectue le lien de parenté entre la constante popup et la divForPopup
 
-                function showPopup() {      // permet d'afficher le popup
-                    if (testId.value <= n) {        // comparer la date entrée avec la date du jour
-                        popup.appendChild(messageError);
+                    var testId = document.getElementById("id_date");
+                    var dd = (new Date().getDate()).toString().padStart(2, "0");
+                    var mm = (new Date().getMonth() + 1).toString().padStart(2, "0");
+                    var yyyy = new Date().getFullYear();
+                    var n = yyyy + '-' + mm + '-' + dd;
+
+                    function showPopup() {      // permet d'afficher le popup
+                        if (testId.value <= n) {        // comparer la date entrée avec la date du jour
+                            const divFond = document.createElement("div");
+                            divFond.setAttribute("id", "divFond");
+                            divFond.style.backgroundColor = "purple";
+                            divFond.style.padding = "25px";
+                            divFond.style.color = "red";
+                            divFond.style.fontSize = "25px";
+
+                            const popup = document.createElement("span"); //Dom création de l'héritage
+                            popup.setAttribute("class", "popuperror");
+                            popup.setAttribute("id", "id_popuperror");
+
+                            const messageError = document.createTextNode("La date entrée n'est pas valide !");
+                            document.getElementById("divForPopup").appendChild(divFond);
+                            document.getElementById("divFond").appendChild(popup);
+                            popup.appendChild(messageError);
+                        }
                     }
-                }
 
-                var testId = document.getElementById("id_date");
-                var dd = new Date().getDate();
-                var mm = new Date().getMonth();
-                var yyyy = new Date().getFullYear();
-                var n = yyyy + '-' + mm + 1 + '-' + dd;
-                testId.addEventListener("change", showPopup); // callback
+                    testId.addEventListener("change", showPopup);  //Callback, la function "showPopup" est passée en paramètre de la function "addEventListener".
 
-            </script>
-            <input type="submit" class="btn btn-success" value="Ajouter réservation">
-        </form>
+                </script>
+                <input type="submit" class="btn btn-success" value="Ajouter réservation">
+            </form>
+        </div>
+
     </div>
-
-</div>
 
 
 {% endblock %}
