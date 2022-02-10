@@ -22,7 +22,11 @@
                     var yyyy = new Date().getFullYear();
                     var n = yyyy + '-' + mm + '-' + dd;     // variable qui permet d'obtenir la date du jour.
 
+
                     function showPopup() {
+                        if (document.getElementById("divForPopup").querySelector("#divFond") != null) {
+                            document.getElementById("divForPopup").removeChild(document.getElementById("divFond"))
+                        }
                         if (testId.value <= n) {        // comparer la date entrée avec la date du jour
                             const divFond = document.createElement("div");      // création d'un noeud div
                             divFond.setAttribute("id", "divFond");
@@ -40,9 +44,10 @@
                             document.getElementById("divFond").appendChild(popup);      // popup est l'héritage de divfond
                             popup.appendChild(messageError);        // messageError est l'héritage de popup
                         }
-
                     }
-                    testId.addEventListener("change", showPopup);  //Callback, la function "showPopup" est passée en paramètre de la function "addEventListener".
+
+                    testId.addEventListener("change", showPopup);
+
 
                 </script>
                 <input type="submit" class="btn btn-success" value="Ajouter réservation">
