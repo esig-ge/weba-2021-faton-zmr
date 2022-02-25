@@ -60,7 +60,6 @@ def checkout(request):
         cartItems = commande['get_cart_items']
 
     context = {'items': items, 'commande': commande, 'cartItems': cartItems}
-    # context = {}
     if request.method == 'POST':
         return redirect('../landing.html', id=2)
     return render(request, 'checkout.html', context)
