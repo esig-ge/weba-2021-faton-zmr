@@ -52,6 +52,7 @@
                 <div style="flex:1"><p>{{ item.produit.prix_vente }}.-</p></div>
                 <div style="flex:1">
                     <p class="quantity" id="qte-item">{{ item.quantite }}</p>
+                    <input type="nbr" value="{{ item.quantite }}">
                     <div class="quantity">
                         <img data-produit="{{ item.produit.id }}" data-action="add"
                              class="chg-quantity update-cart" src="{% static 'media/plus.png' %}">
@@ -66,13 +67,13 @@
             </div>
             {% endfor %}
             <button id="rem">-</button>
-            <input type="nbr" value="0">
+
             <button id="add">+</button>
 
             <script>
                 let btnAdd = document.querySelector('#add')
                 let btnRem = document.querySelector('#rem')
-                let input = document.querySelector('#qte-item')
+                let input = document.querySelector('input')
 
                 btnAdd.addEventListener('click', () => {
                     input.value = parseInt(input.value) + 1;

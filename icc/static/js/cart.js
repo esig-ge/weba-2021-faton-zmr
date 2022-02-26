@@ -42,3 +42,15 @@ function updateUserOrder(produitId, action) {
         })
 
 }
+
+function updateQte(produitId, action) {
+    var url = 'update_item/'
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        JSON.stringify({'produitId': produitId, 'action': action})
+    }
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
+
