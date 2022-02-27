@@ -42,14 +42,14 @@
     }
 
     function confirmerAjout(event) {
-        var xhr = new XMLHttpRequest();  // objet qui contient les méthodes
+        var XHTTR = new XMLHttpRequest();  // objet qui contient les méthodes
 
         var btnProdId = event.target.id.substring(10)   // substring permet d'enlever les caractères précédents afin de récupérer l'id.
         console.log(btnProdId)
 
-        xhr.open('GET', 'http://127.0.0.1:8000/produits/detailProd/' + btnProdId + '/', true); // prépare la requete. true renvoi la page de manière asynchrome.
+        XHTTR.open('GET', 'http://127.0.0.1:8000/produits/detailProd/' + btnProdId + '/', true); // prépare la requete. true renvoi la page de manière asynchrome.
         console.log()
-        xhr.onload = function () {    // j'attribue à la méthode onload une fonction / onload récupere les données du serveur (views.py)
+        XHTTR.onload = function () {    // j'attribue à la méthode onload une fonction / onload récupere les données du serveur (views.py)
             if (this.status === 200) {   // vérifie si la page a bien été chargée
                 var response = JSON.parse(this.responseText)  // récupere les informations du produits
                 console.log(response)
@@ -59,10 +59,10 @@
                     + '<th>' + response.produitDico.nom + '</th>'
                     + '</tr>'
                     + '<tr>'
-                    + '<th>' + response.produitDico.prix_vente + '</th>'
+                    + '<th>' + response.produitDico.prix_vente + ' CHF' + '</th>'
                     + '</tr>'
                     + '<tr>'
-                    + '<th>' + response.produitDico.capacite + '</th>'
+                    + '<th>' + response.produitDico.capacite + ' ml' + '</th>'
                     + '</tr>'
                     + '</table>';
 
@@ -70,7 +70,7 @@
                 paragraphe.innerHTML = show;
             }
         }
-        xhr.send();
+        XHTTR.send();
     }
 
 </script>

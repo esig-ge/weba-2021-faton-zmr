@@ -136,7 +136,7 @@ def detailPourPanier(request, pk):
     produit = Produit.objects.get(id=pk)
     produitDico = {"nom": produit.nom, "prix_vente": produit.prix_vente, "capacite": produit.capacite}
     print(produitDico)
-    sleep(5)
+    # sleep(5)
     return JsonResponse({'produitDico': produitDico})
 
 # stripe.api_key = settings.STRIPE_SECRET_KEY
