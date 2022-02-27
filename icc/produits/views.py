@@ -8,6 +8,7 @@ from django.views import View
 from commande.models import *
 from django.http import JsonResponse
 import json
+from time import sleep
 
 
 # Create your views here.
@@ -133,9 +134,10 @@ def updateItem(request):
 
 def detailPourPanier(request, pk):
     produit = Produit.objects.get(id=pk)
-    produitDico = {'nom': produit.nom, 'prix_vente': produit.prix_vente}
-
-    return JsonResponse({'produit': produit})
+    produitDico = {"nom": produit.nom, "prix_vente": produit.prix_vente, "capacite": produit.capacite}
+    print(produitDico)
+    sleep(5)
+    return JsonResponse({'produitDico': produitDico})
 
 # stripe.api_key = settings.STRIPE_SECRET_KEY
 #
