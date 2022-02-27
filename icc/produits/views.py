@@ -134,7 +134,7 @@ def updateItem(request):
 
 def detailPourPanier(request, pk):
     produit = Produit.objects.get(id=pk)
-    produitDico = {"nom": produit.nom, "prix_vente": produit.prix_vente, "capacite": produit.capacite}
+    produitDico = {"nom": produit.nom, "prix_vente": produit.prix_vente, "capacite": produit.capacite, "categorie": produit.categorie}
     print(produitDico)
     # sleep(5)
     return JsonResponse({'produitDico': produitDico})

@@ -36,24 +36,19 @@
 <script>
     var listeBtn = document.getElementsByClassName('btnConfirmerPanier');   // recupere la liste des boutons
     // console.log(listeBtn);
-
     for (var i = 0; i < listeBtn.length; i++) {     // pour chaque boutons, je rajoute un evenement "click" pour confirmerAjout
         listeBtn[i].addEventListener('click', confirmerAjout);
     }
 
     function confirmerAjout(event) {
         var XHTTR = new XMLHttpRequest();  // objet qui contient les méthodes
-
         var btnProdId = event.target.id.substring(10)   // substring permet d'enlever les caractères précédents afin de récupérer l'id.
         console.log(btnProdId)
-
         XHTTR.open('GET', 'http://127.0.0.1:8000/produits/detailProd/' + btnProdId + '/', true); // prépare la requete. true renvoi la page de manière asynchrome.
-        console.log()
         XHTTR.onload = function () {    // j'attribue à la méthode onload une fonction / onload récupere les données du serveur (views.py)
             if (this.status === 200) {   // vérifie si la page a bien été chargée
                 var response = JSON.parse(this.responseText)  // récupere les informations du produits
                 console.log(response)
-
                 var show = '<table>'
                     + '<tr>'
                     + '<th>' + response.produitDico.nom + '</th>'
@@ -64,10 +59,12 @@
                     + '<tr>'
                     + '<th>' + response.produitDico.capacite + ' ml' + '</th>'
                     + '</tr>'
+                     + '<tr>'
+                    + '<th>' + response.produitDico.categorie + '</th>'
+                    + '</tr>'
                     + '</table>';
-
                 paragraphe = document.getElementById(btnProdId);
-                paragraphe.innerHTML = show;
+                paragraphe.innerHTML = show;       // création du tableau avec les données souhaitées.
             }
         }
         XHTTR.send();
