@@ -130,6 +130,13 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+
+def detailPourPanier(request, pk):
+    produit = Produit.objects.get(id=pk)
+    produitDico = {'nom': produit.nom, 'prix_vente': produit.prix_vente}
+
+    return JsonResponse({'produit': produit})
+
 # stripe.api_key = settings.STRIPE_SECRET_KEY
 #
 #
