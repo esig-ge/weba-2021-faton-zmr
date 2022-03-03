@@ -1,6 +1,7 @@
 # Zumeri Faton et Châtelain Dorian
 import stripe
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import ProduitForm
 from .models import Produit
@@ -132,9 +133,11 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 
+@login_required
 def detailPourPanier(request, pk):
     produit = Produit.objects.get(id=pk)
-    produitDico = {"nom": produit.nom, "prix_vente": produit.prix_vente, "capacite": produit.capacite, "categorie": produit.categorie}
+    produitDico = {"nom": produit.nom, "prix_vente": produit.prix_vente, "capacite": produit.capacite,
+                   "categorie": produit.categorie}
     print(produitDico)
     # sleep(5)
     return JsonResponse({'produitDico': produitDico})
