@@ -1,10 +1,10 @@
-{# Dorian Châtelain#}
+{# Dorian Châtelain ----- <script>alert("DORIAN LE PIRE CODEUR DE L'UNIVERS")</script>#}
 {% extends 'base.html' %}
 
 {% block content %}
 
     <h1>Souhaitez-vous ajouter des clients ?</h1><br><br><br>
-
+{% autoescape off%}
     <div class="col">
         <h5>Clients:</h5>
         <hr>
@@ -37,5 +37,5 @@
             </table>
         </div>
     </div>
-
+{% endautoescape %}
 {% endblock %}

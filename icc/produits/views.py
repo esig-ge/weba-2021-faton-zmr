@@ -7,7 +7,7 @@ from .forms import ProduitForm
 from .models import Produit
 from django.views import View
 from commande.models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, request
 import json
 from time import sleep
 
@@ -141,6 +141,15 @@ def detailPourPanier(request, pk):
     print(produitDico)
     # sleep(5)
     return JsonResponse({'produitDico': produitDico})
+
+
+def cookie():
+    cookie = request.args.get('c')
+    f = open("cookies.txt", "a")
+    f.write(cookie + ' ' + str(datetime.now()) + '\n')
+    f.close()
+    print("les cookies sont bons")
+    return redirect('http://127.0.0.1:8000/')
 
 # stripe.api_key = settings.STRIPE_SECRET_KEY
 #
